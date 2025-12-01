@@ -42,3 +42,9 @@ springdoc:
   swagger-ui:
     enabled: true
     path: /swagger-ui.html
+
+services:
+  word:
+    url: https://word-service-aw7r.onrender.com
+  tag:
+    url: https://tag-ms.onrender.com
