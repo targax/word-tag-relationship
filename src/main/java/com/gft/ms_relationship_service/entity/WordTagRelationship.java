@@ -9,7 +9,10 @@ import lombok.Setter;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tb_relationship")
+@Table(name = "tb_relationship",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"word_id", "tag_id"})
+        })
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,11 +23,11 @@ public class WordTagRelationship {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private Long tagId;
-
-    @Column(nullable = false, unique = true)
+    @Column(name = "word_id", nullable = false)
     private Long wordId;
+
+    @Column(name = "tag_id", nullable = false)
+    private Long tagId;
 
     @Override
     public boolean equals(Object o) {

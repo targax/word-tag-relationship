@@ -4,6 +4,12 @@ import com.gft.ms_relationship_service.entity.WordTagRelationship;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface WordTagRepository extends JpaRepository<WordTagRelationship, Long> {
+
+    List<WordTagRelationship> findByTagId(Long tagId);
+
+    List<WordTagRelationship> findByWordId(Long wordId);
 }

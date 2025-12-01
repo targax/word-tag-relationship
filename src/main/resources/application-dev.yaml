@@ -17,3 +17,9 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+services:
+  word:
+    url: https://word-service-aw7r.onrender.com
+  tag:
+    url: https://tag-ms.onrender.com
