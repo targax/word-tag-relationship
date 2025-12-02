@@ -1,7 +1,9 @@
 package com.gft.ms_relationship_service.controller;
 
 import com.gft.ms_relationship_service.dto.CreateRelationshipRequest;
+import com.gft.ms_relationship_service.dto.PalavraRelacionadaResponse;
 import com.gft.ms_relationship_service.dto.RelationshipResponse;
+import com.gft.ms_relationship_service.dto.TagRelacionadaResponse;
 import com.gft.ms_relationship_service.entity.WordTagRelationship;
 import com.gft.ms_relationship_service.service.WordTagService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,14 +38,14 @@ public class WordTagController {
 
     @Operation(summary = "Lista todas as palavras associadas a uma tag")
     @GetMapping("/palavras-por-tag/{tagId}")
-    public ResponseEntity<List<Long>> getPalavrasPorTag(@PathVariable Long tagId) {
+    public ResponseEntity<List<PalavraRelacionadaResponse>> getPalavrasPorTag(@PathVariable Long tagId) {
 
         return ResponseEntity.ok(wordTagService.getPalavrasPorTag(tagId));
     }
 
     @Operation(summary = "Lista todas as tags associadas a uma palavra")
     @GetMapping("/tags-por-palavra/{wordId}")
-    public ResponseEntity<List<Long>> getTagsPorPalavra(@PathVariable Long wordId) {
+    public ResponseEntity<List<TagRelacionadaResponse>> getTagsPorPalavra(@PathVariable Long wordId) {
 
         return ResponseEntity.ok(wordTagService.getTagsPorPalavra(wordId));
     }

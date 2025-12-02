@@ -2,7 +2,7 @@ package com.gft.ms_relationship_service.service;
 
 import com.gft.ms_relationship_service.client.TagClient;
 import com.gft.ms_relationship_service.client.WordClient;
-import com.gft.ms_relationship_service.dto.CreateRelationshipRequest;
+import com.gft.ms_relationship_service.dto.*;
 import com.gft.ms_relationship_service.entity.WordTagRelationship;
 import com.gft.ms_relationship_service.exception.EtiquetaNaoEncontradaException;
 import com.gft.ms_relationship_service.exception.PalavraNaoEncontradaException;
@@ -60,19 +60,27 @@ public class WordTagService {
         }
     }
 
-    public List<Long> getPalavrasPorTag(Long tagId) {
-        return wordTagRepository.findByTagId(tagId)
-                .stream()
-                .map(WordTagRelationship::getWordId)
+    public List<PalavraRelacionadaResponse> getPalavrasPorTag(Long tagId) {
+
+        return wordTagRepository.findByTagId(tagId).stream()
+                .map(rel -> {
+                    WordResponse word = wordClient.getWord(rel.getWordId());
+                    return new PalavraRelacionadaResponse(word.getId(), word.getTexto());
+                })
                 .toList();
     }
 
-    public List<Long> getTagsPorPalavra(Long wordId) {
-        return wordTagRepository.findByWordId(wordId)
-                .stream()
-                .map(WordTagRelationship::getTagId)
+
+    public List<TagRelacionadaResponse> getTagsPorPalavra(Long wordId) {
+
+        return wordTagRepository.findByWordId(wordId).stream()
+                .map(rel -> {
+                    TagResponse tag = tagClient.getTag(rel.getTagId());
+                    return new TagRelacionadaResponse(tag.getId(), tag.getNome());
+                })
                 .toList();
     }
+
 
 
 

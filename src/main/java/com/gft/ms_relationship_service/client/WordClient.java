@@ -1,5 +1,6 @@
 package com.gft.ms_relationship_service.client;
 
+import com.gft.ms_relationship_service.dto.WordResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,4 +11,8 @@ public interface WordClient {
 
     @GetMapping("/palavras/existe/{id}")
     ResponseEntity<Void> verificaPalavra(@PathVariable Long id);
+
+    @GetMapping("/palavras/{id}")
+    WordResponse getWord(@PathVariable Long id);
+
 }
