@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @Service
 @Slf4j
-public class RelationshipDeletionConsumer implements IRelationshipDeletionConsumer {
+public class EtiquetaExcluidaConsumer implements IEtiquetaExcluidaConsumer {
 
     private final WordTagService wordTagService;
 

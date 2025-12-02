@@ -95,6 +95,23 @@ public class WordTagService {
     }
 
 
+    public void  removerPorWordId(Long wordId){
+
+        List<WordTagRelationship> relacoes = wordTagRepository.findByWordId(wordId);
+
+        if (relacoes.isEmpty()) {
+            log.info("⚠️ Nenhum relacionamento encontrado para wordId={}", wordId);
+            return;
+        }
+
+        wordTagRepository.deleteAll(relacoes);
+
+        log.info("🧹 Remoção concluída! 🗑️ {} relacionamentos excluídos para wordId={}",
+                relacoes.size(), wordId);
+
+    }
+
+
     public void delete(Long id){
         WordTagRelationship response=wordTagRepository.findById(id).orElseThrow(() -> new RuntimeException("id não encontrado"));
         wordTagRepository.deleteById(id);

@@ -13,15 +13,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
     //<serviço>.<domínio>.<ação>.queue
-    public static final String QUEUE_NAME = "tag-ms.etiqueta.excluida.queue";
+    public static final String QUEUE_NAME_WORD = "word-service.word.excluida.queue";
+
+    //<serviço>.<domínio>.<ação>.queue
+    public static final String QUEUE_NAME_TAG = "tag-ms.etiqueta.excluida.queue";
 
 
-    //<serviço>.<domínio>.exchange
-    public static   final String EXCHANGE_NAME = "tag-ms.etiqueta.exchange";
 
 
-    //<serviço>.<domínio>.<ação>.routing-key
-    public  static  final String ROUTING_KEY = "tag-ms.etiqueta.excluida.rk";
 
 
     @Bean
@@ -35,8 +34,6 @@ public class RabbitMQConfig {
             final ConnectionFactory connectionFactory,
             final Jackson2JsonMessageConverter converter){
 
-
-
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
 
         rabbitTemplate.setMessageConverter(converter);
@@ -47,23 +44,15 @@ public class RabbitMQConfig {
 
     // Criar Fila
     @Bean
-    public Queue queue(){
-        return new Queue(QUEUE_NAME,true);
+    public Queue queueTag(){
+        return new Queue(QUEUE_NAME_TAG,true);
     }
 
-    // Criar Exchange
     @Bean
-    public DirectExchange exchange(){
-        return new DirectExchange(EXCHANGE_NAME);
+    public Queue queueWord(){
+        return new Queue(QUEUE_NAME_WORD,true);
     }
 
-    // criar Binding
-    @Bean
-    public Binding binding(final Queue queue, final DirectExchange exchange){
-        return BindingBuilder.bind(queue)
-                .to(exchange)
-                .with(ROUTING_KEY);
-    }
 
 
 
