@@ -18,6 +18,13 @@ spring:
       hibernate:
         format_sql: true
 
+  rabbitmq:
+    addresses: amqps://waebvucx:qWtlJy-9NgqOUuVmC8r29m4luRrwkXS_@seal.lmq.cloudamqp.com/waebvucx
+    queue:
+      tag:
+        name: tag-ms.etiqueta.excluida.queue
+
+
 services:
   word:
     url: https://word-service-aw7r.onrender.com

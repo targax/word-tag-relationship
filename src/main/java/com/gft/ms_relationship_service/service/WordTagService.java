@@ -7,12 +7,14 @@ import com.gft.ms_relationship_service.entity.WordTagRelationship;
 import com.gft.ms_relationship_service.exception.EtiquetaNaoEncontradaException;
 import com.gft.ms_relationship_service.exception.PalavraNaoEncontradaException;
 import com.gft.ms_relationship_service.repository.WordTagRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class WordTagService {
 
     private final WordTagRepository wordTagRepository;
@@ -70,6 +72,26 @@ public class WordTagService {
                 .stream()
                 .map(WordTagRelationship::getTagId)
                 .toList();
+    }
+
+
+
+    public void removerPorTagId(Long tagId) {
+
+        List<WordTagRelationship> relacionamentos =
+                wordTagRepository.findByTagId(tagId);
+
+        if (relacionamentos.isEmpty()) {
+            log.info("⚠️ Nenhum relacionamento encontrado para tagId={}", tagId);
+            return;
+        }
+
+        wordTagRepository.deleteAll(relacionamentos);
+
+        log.info("🧹 Remoção concluída! 🗑️ {} relacionamentos excluídos para tagId={}",
+                relacionamentos.size(), tagId);
+
+
     }
 
 
