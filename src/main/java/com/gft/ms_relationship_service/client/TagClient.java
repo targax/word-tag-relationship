@@ -1,5 +1,6 @@
 package com.gft.ms_relationship_service.client;
 
+import com.gft.ms_relationship_service.dto.TagResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,5 +11,9 @@ public interface TagClient {
 
     @GetMapping("/tags/exists/{id}")
     ResponseEntity<Void> verificaTag(@PathVariable Long id);
+
+    @GetMapping("/tags/{id}")
+    TagResponse getTag(@PathVariable Long id);
+
 }
 
