@@ -10,5 +10,5 @@ import lombok.Setter;
 public class TagResponse {
 
     private Long id;
-    private String nome;
+    private String name;
 }

@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class WordResponse {
+
     private Long id;
-    private String texto;
+    private String termo;
 }
