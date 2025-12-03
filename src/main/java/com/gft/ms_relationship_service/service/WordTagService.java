@@ -65,7 +65,7 @@ public class WordTagService {
         return wordTagRepository.findByTagId(tagId).stream()
                 .map(rel -> {
                     WordResponse word = wordClient.getWord(rel.getWordId());
-                    return new PalavraRelacionadaResponse(word.getId(), word.getTexto());
+                    return new PalavraRelacionadaResponse(word.getId(), word.getTermo());
                 })
                 .toList();
     }
@@ -76,7 +76,7 @@ public class WordTagService {
         return wordTagRepository.findByWordId(wordId).stream()
                 .map(rel -> {
                     TagResponse tag = tagClient.getTag(rel.getTagId());
-                    return new TagRelacionadaResponse(tag.getId(), tag.getNome());
+                    return new TagRelacionadaResponse(tag.getId(), tag.getName());
                 })
                 .toList();
     }
