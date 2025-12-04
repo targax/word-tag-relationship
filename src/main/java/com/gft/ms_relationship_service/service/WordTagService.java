@@ -119,8 +119,21 @@ public class WordTagService {
 
     }
 
-    public List<WordTagRelationship> getAll() {
-        return wordTagRepository.findAll();
+    public List<RelationshipSimpleResponse> getAll() {
+
+        return wordTagRepository.findAll().stream()
+                .map(rel -> {
+
+                    var word = wordClient.getWord(rel.getWordId());
+                    var tag = tagClient.getTag(rel.getTagId());
+
+                    return new RelationshipSimpleResponse(
+                            rel.getId(),
+                            word.getTermo(),
+                            tag.getName()
+                    );
+                })
+                .toList();
     }
 
     public void delete(Long id){

@@ -1,9 +1,6 @@
 package com.gft.ms_relationship_service.controller;
 
-import com.gft.ms_relationship_service.dto.CreateRelationshipRequest;
-import com.gft.ms_relationship_service.dto.PalavraRelacionadaResponse;
-import com.gft.ms_relationship_service.dto.RelationshipResponse;
-import com.gft.ms_relationship_service.dto.TagRelacionadaResponse;
+import com.gft.ms_relationship_service.dto.*;
 import com.gft.ms_relationship_service.entity.WordTagRelationship;
 import com.gft.ms_relationship_service.service.WordTagService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -50,8 +47,8 @@ public class WordTagController {
         return ResponseEntity.ok(wordTagService.getTagsPorPalavra(wordId));
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<WordTagRelationship>> getAll() {
+    @GetMapping("/all-simple")
+    public ResponseEntity<List<RelationshipSimpleResponse>> getAllSimple() {
         return ResponseEntity.ok(wordTagService.getAll());
     }
 
