@@ -119,6 +119,9 @@ public class WordTagService {
 
     }
 
+    public List<WordTagRelationship> getAll() {
+        return wordTagRepository.findAll();
+    }
 
     public void delete(Long id){
         WordTagRelationship response=wordTagRepository.findById(id).orElseThrow(() -> new RuntimeException("id não encontrado"));

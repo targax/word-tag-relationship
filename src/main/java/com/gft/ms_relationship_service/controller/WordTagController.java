@@ -49,4 +49,10 @@ public class WordTagController {
 
         return ResponseEntity.ok(wordTagService.getTagsPorPalavra(wordId));
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<WordTagRelationship>> getAll() {
+        return ResponseEntity.ok(wordTagService.getAll());
+    }
+
 }
